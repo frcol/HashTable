@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include "hashTable.h"
 
+
 void ler_arquivo(TabelaHash* tabela, const char* nome_arquivo) {
     FILE* arquivo = fopen(nome_arquivo, "r");
     if (!arquivo) {
@@ -30,7 +31,8 @@ void buscaAluno(TabelaHash* tabela, int matricula_busca) {
 }
 
 int main() {
-    TabelaHash* tabela = criar_tabela(101);
+    int tamanho = 1001;
+    TabelaHash* tabela = criar_tabela(tamanho);
 
     ler_arquivo(tabela, "dados.txt");
 

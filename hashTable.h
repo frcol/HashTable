@@ -1,6 +1,16 @@
 /*
-    Pensando em uma tabela grande e precisando economizar memória
-    Por isso, só estamos alocando a ListaSequencial no momento da inserção
+Avalie o desempenho da Tabela Hash na inserção desses dados quando diferentes configurações são usadas: 
+- tamanho inicial da tabela (int tamanho = 101; main.c), 
+- tamanho ser primo ou não (int tamanho = 101; main.c), 
+- função de espalhamento (chaveDivisao, chaveDobra, chaveMultiplicacao)
+- etc
+
+Alguns parâmetros a serem avaliados:
+- Número de listas criadas
+- Tamanho médio das listas
+- Número de colisões
+- Desperdício de memória nas listas (posições ociosas)
+- Etc
 */
 
 #include "ListaSequencial.h"
@@ -15,7 +25,9 @@ typedef struct {
 TabelaHash* criar_tabela();
 void destruir_tabela(TabelaHash* tabela);
 
-int funcao_hash(TabelaHash* tabela, int matricula);
+int chaveDivisao(int chave, int TABLE_SIZE);
+int chaveDobra(int chave, int TABLE_SIZE);
+int chaveMultiplicacao(int chave, int TABLE_SIZE);
 
 void inserir_tabela(TabelaHash* tabela, Aluno aluno);
 void remover_tabela(TabelaHash* tabela, int matricula);
