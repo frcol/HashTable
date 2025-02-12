@@ -19,6 +19,17 @@ void ler_arquivo(TabelaHash* tabela, const char* nome_arquivo) {
     fclose(arquivo);
 }
 
+void ler_vetor(ListaSequencial* lista) {
+    Aluno al, a[4] = {{12352,"Andre",9.5,7.8,8.5},//64
+                    {7894,"Ricardo",7.5,8.7,6.8},//726
+                    {3451,"Bianca",9.7,6.7,8.4},//379
+                    {5293,"Ana",5.7,6.1,7.4}};//173
+
+    int i;
+    for(i=0; i < 4; i++){
+        inserir_lista(lista,a[i]);
+    }
+}
 
 void buscaAluno(TabelaHash* tabela, int matricula_busca) {
     Aluno* encontrado = buscar_tabela(tabela, matricula_busca);
@@ -32,16 +43,25 @@ void buscaAluno(TabelaHash* tabela, int matricula_busca) {
 
 int main() {
     int tamanho = 1001;
-    TabelaHash* tabela = criar_tabela(tamanho);
-
-    ler_arquivo(tabela, "dados.txt");
-
-    printf("Tabela Hash Populada:\n");
-    imprimir_tabela_Qtde(tabela);
-
-    buscaAluno(tabela, 234234243);
-    buscaAluno(tabela, 30856);
     
-    destruir_tabela(tabela);
+    ListaSequencial* lista = criar_lista();
+    ler_vetor(lista);
+
+    imprimir_lista(lista);
+
+    destruir_lista(lista);
+
+
+    //TabelaHash* tabela = criar_tabela(tamanho);
+
+    // ler_arquivo(tabela, "dados.txt");
+
+    // printf("Tabela Hash Populada:\n");
+    // imprimir_relatorio(tabela);
+
+    // buscaAluno(tabela, 234234243);
+    // buscaAluno(tabela, 30856);
+    
+    // destruir_tabela(tabela);
     return 0;
 }

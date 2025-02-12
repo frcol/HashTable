@@ -34,4 +34,4 @@ void remover_tabela(TabelaHash* tabela, int matricula);
 Aluno* buscar_tabela(TabelaHash* tabela, int matricula);
 
 void imprimir_tabela(TabelaHash* tabela);
-void imprimir_tabela_Qtde(TabelaHash* tabela);
+void imprimir_relatorio(TabelaHash* tabela);

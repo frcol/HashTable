@@ -81,9 +81,21 @@ int imprimir_lista(ListaSequencial *lista)
     }
 }
 
-int tamanho_lista(ListaSequencial *lista)
+int tamanho_lista_ocupado(ListaSequencial *lista)
 {
     if (lista == NULL) return 0;
 
     return lista->tamanho;
+}
+
+int tamanho_lista_ocioso(ListaSequencial* lista) {
+    if (lista == NULL) return 0;
+
+    return lista->capacidade - lista->tamanho;
+}
+
+int capacidade(ListaSequencial* lista) {
+    if (lista == NULL) return 0;
+
+    return lista->capacidade;
 }
