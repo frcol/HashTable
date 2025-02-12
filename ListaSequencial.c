@@ -51,3 +51,7 @@ void imprimir_lista(ListaSequencial* lista) {
                lista->dados[i].nota1, lista->dados[i].nota2, lista->dados[i].nota3);
     }
 }
+
+void tamanho_lista(ListaSequencial* lista) {
+    printf("%d\n", lista->tamanho);
+}

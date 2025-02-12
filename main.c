@@ -30,12 +30,12 @@ void buscaAluno(TabelaHash* tabela, int matricula_busca) {
 }
 
 int main() {
-    TabelaHash* tabela = criar_tabela();
+    TabelaHash* tabela = criar_tabela(101);
 
     ler_arquivo(tabela, "dados.txt");
 
     printf("Tabela Hash Populada:\n");
-    imprimir_tabela(tabela);
+    imprimir_tabela_Qtde(tabela);
 
     buscaAluno(tabela, 234234243);
     buscaAluno(tabela, 30856);

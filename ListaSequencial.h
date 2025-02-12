@@ -19,4 +19,4 @@ void inserir_lista(ListaSequencial* lista, Aluno aluno);
 void remover_lista(ListaSequencial* lista, int matricula);
 Aluno* buscar_lista(ListaSequencial* lista, int matricula);
 void imprimir_lista(ListaSequencial* lista);
-
+void tamanho_lista(ListaSequencial* lista);
