@@ -41,27 +41,100 @@ void buscaAluno(TabelaHash* tabela, int matricula_busca) {
     }
 }
 
+// int main() {
+//     int tamanho = 1001;
+    
+//     // ListaSequencial* lista = criar_lista();
+//     // ler_vetor(lista);
+
+//     // imprimir_lista(lista);
+
+//     // destruir_lista(lista);
+
+
+//     TabelaHash* tabela = criar_tabela(tamanho);
+
+//     ler_arquivo(tabela, "dados.txt");
+
+//     printf("Tabela Hash Populada:\n");
+//     imprimir_relatorio(tabela);
+
+//     buscaAluno(tabela, 234234243);
+//     buscaAluno(tabela, 30856);
+    
+//     destruir_tabela(tabela);
+//     return 0;
+// }
+
+void menu() {
+    printf("\n===== MENU =====\n");
+    printf("1 - Inserir aluno\n");
+    printf("2 - Buscar aluno\n");
+    printf("3 - Remover aluno\n");
+    printf("4 - Imprimir tabela hash\n");
+    printf("5 - Imprimir relatório\n");
+    printf("6 - Sair\n");
+    printf("Escolha uma opcao: ");
+}
+
 int main() {
-    int tamanho = 1001;
-    
-    // ListaSequencial* lista = criar_lista();
-    // ler_vetor(lista);
+    int tamanho, opcao, matricula;
+    char nome[50];
 
-    // imprimir_lista(lista);
+    printf("Digite o tamanho da tabela hash: ");
+    scanf("%d", &tamanho);
 
-    // destruir_lista(lista);
+    TabelaHash *tabela = criar_tabela(tamanho);
+    if (!tabela) {
+        printf("Erro ao criar a tabela hash!\n");
+        return 1;
+    }
 
+    while (1) {
+        menu();
+        scanf("%d", &opcao);
 
-    TabelaHash* tabela = criar_tabela(tamanho);
+        switch (opcao) {
+            case 1: {
+                Aluno aluno;
+                printf("Digite a matricula do aluno: ");
+                scanf("%d", &aluno.matricula);
+                printf("Digite o nome do aluno: ");
+                scanf("%s", aluno.nome);
 
-    ler_arquivo(tabela, "dados.txt");
+                inserir_tabela(tabela, aluno);
+                printf("Aluno inserido com sucesso!\n");
+                break;
+            }
+            case 2:
+                printf("Digite a matricula do aluno a ser buscado: ");
+                scanf("%d", &matricula);
+                Aluno *resultado = buscar_tabela(tabela, matricula);
+                if (resultado)
+                    printf("Aluno encontrado: Matricula %d, Nome %s\n", resultado->matricula, resultado->nome);
+                else
+                    printf("Aluno nao encontrado!\n");
+                break;
+            case 3:
+                printf("Digite a matricula do aluno a ser removido: ");
+                scanf("%d", &matricula);
+                remover_tabela(tabela, matricula);
+                printf("Aluno removido!\n");
+                break;
+            case 4:
+                imprimir_tabela(tabela);
+                break;
+            case 5:
+                imprimir_relatorio(tabela);
+                break;
+            case 6:
+                destruir_tabela(tabela);
+                printf("Encerrando programa...\n");
+                return 0;
+            default:
+                printf("Opcao invalida!\n");
+        }
+    }
 
-    printf("Tabela Hash Populada:\n");
-    imprimir_relatorio(tabela);
-
-    buscaAluno(tabela, 234234243);
-    buscaAluno(tabela, 30856);
-    
-    destruir_tabela(tabela);
     return 0;
 }

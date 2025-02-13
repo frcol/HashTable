@@ -90,11 +90,17 @@ int chaveMultiplicacao(int chave, int TABLE_SIZE)
 // =====================================================
 void inserir_tabela(TabelaHash *tabela, Aluno aluno)
 {
+    if (tabela == NULL) return;
+
     int pos = chaveDivisao(aluno.matricula, tabela->TABLE_SIZE); // <-- alterar a chave para fazer testes de performance
 
     if (tabela->itens[pos] == NULL)
     {
         tabela->itens[pos] = criar_lista();
+        if (tabela->itens[pos] == NULL) {
+            printf("Erro: Falha ao alocar memória para nova lista!\n");
+            return;
+        }
         numListas++;
     }
     else
@@ -159,12 +165,21 @@ void imprimir_tabela(TabelaHash *tabela)
 
 void imprimir_relatorio(TabelaHash *tabela)
 {
+    if (tabela == NULL) return;
+
     int tamanhoOcupadoTotalLista = 0; // soma total dos itens nas listas
     int tamanhoTotalLista = 0;        //  capacidade de todas as listas
     int tamanhoTotalOcioso = 0;
 
     printf("=======================================\n");
     printf("Numero de listas criadas: %d/%d\n", numListas, tabela->TABLE_SIZE);
+    printf("Numero de colisoes: %d\n", numColisoes);
+
+    if (numListas == 0) {
+        printf("Nenhuma lista foi criada.\n");
+        printf("=======================================\n");
+        return;
+    }
 
     for (int i = 0; i < tabela->TABLE_SIZE; i++)
     {
@@ -177,11 +192,8 @@ void imprimir_relatorio(TabelaHash *tabela)
     }
 
     printf("Tamanho total das listas: %d\n", tamanhoTotalLista);
-    if (numListas > 0)
-        printf("Tamanho medio ocupado das listas: %d\n", tamanhoTotalLista / numListas);
-    else
-        printf("Tamanho medio ocupado das listas: 0 (Nenhuma lista criada)\n");
-    printf("Espaços ociosos nas listas: %d\n", tamanhoTotalOcioso);
-    printf("Numero de colisoes: %d\n", numColisoes);
+    printf("Tamanho medio ocupado das listas: %d\n", (numListas > 0) ? (tamanhoTotalLista / numListas) : 0);
+    printf("Espacos ociosos nas listas: %d\n", tamanhoTotalOcioso);
+    
     printf("=======================================\n");
 }
