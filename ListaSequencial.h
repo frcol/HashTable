@@ -9,8 +9,8 @@ typedef struct {
 
 typedef struct {
     Aluno *dados;
+    int qtde;
     int tamanho;
-    int capacidade;
 } ListaSequencial;
 
 ListaSequencial* criar_lista();
@@ -21,6 +21,6 @@ int remover_lista(ListaSequencial* lista, int matricula);
 Aluno* buscar_lista(ListaSequencial* lista, int matricula);
 
 void imprimir_lista(ListaSequencial* lista);
-int tamanho_lista_ocupado(ListaSequencial* lista);
-int tamanho_lista_ocioso(ListaSequencial* lista);
-int capacidade(ListaSequencial* lista);
+int qtde_lista_ocupado(ListaSequencial* lista);
+int qtde_lista_ocioso(ListaSequencial* lista);
+int tamanho(ListaSequencial* lista);

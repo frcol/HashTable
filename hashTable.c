@@ -3,7 +3,7 @@
 #include <string.h>
 #include "HashTable.h"
 
-int numListas = 0; // numero total de listas criadas
+int numListas = 0;   // numero total de listas criadas
 int numColisoes = 0; // numero total de colisoes
 
 TabelaHash *criar_tabela(int tamanho)
@@ -97,7 +97,8 @@ void inserir_tabela(TabelaHash *tabela, Aluno aluno)
         tabela->itens[pos] = criar_lista();
         numListas++;
     }
-    else { // houve colisão
+    else
+    { // houve colisão
         numColisoes++;
     }
 
@@ -106,6 +107,8 @@ void inserir_tabela(TabelaHash *tabela, Aluno aluno)
 
 void remover_tabela(TabelaHash *tabela, int matricula)
 {
+    if (tabela == NULL) return;
+
     int pos = chaveDivisao(matricula, tabela->TABLE_SIZE); // <-- alterar a chave para fazer testes de performance
 
     if (tabela->itens[pos] != NULL)
@@ -117,6 +120,7 @@ void remover_tabela(TabelaHash *tabela, int matricula)
         {
             destruir_lista(tabela->itens[pos]);
             tabela->itens[pos] = NULL;
+            numListas--;
         }
 
         tabela->qtd--;
@@ -143,10 +147,11 @@ void imprimir_tabela(TabelaHash *tabela)
     {
         if (tabela->itens[i] != NULL)
         {
-            printf("Posicao %d: (%d)\n", i, tamanho_lista_ocupado(tabela->itens[i]));
+            printf("Posicao %d: (%d)\n", i, qtde_lista_ocupado(tabela->itens[i]));
             imprimir_lista(tabela->itens[i]);
         }
-        else {
+        else
+        {
             printf("Posicao %d: (NULL)\n", i);
         }
     }
@@ -155,7 +160,7 @@ void imprimir_tabela(TabelaHash *tabela)
 void imprimir_relatorio(TabelaHash *tabela)
 {
     int tamanhoOcupadoTotalLista = 0; // soma total dos itens nas listas
-    int tamanhoTotalLista = 0; //  capacidade de todas as listas
+    int tamanhoTotalLista = 0;        //  capacidade de todas as listas
     int tamanhoTotalOcioso = 0;
 
     printf("=======================================\n");
@@ -165,14 +170,17 @@ void imprimir_relatorio(TabelaHash *tabela)
     {
         if (tabela->itens[i] != NULL)
         {
-            tamanhoOcupadoTotalLista += tamanho_lista_ocupado(tabela->itens[i]);
-            tamanhoTotalLista += capacidade(tabela->itens[i]);
-            tamanhoTotalOcioso += tamanho_lista_ocioso(tabela->itens[i]);
+            tamanhoOcupadoTotalLista += qtde_lista_ocupado(tabela->itens[i]);
+            tamanhoTotalLista += tamanho(tabela->itens[i]);
+            tamanhoTotalOcioso += qtde_lista_ocioso(tabela->itens[i]);
         }
     }
 
     printf("Tamanho total das listas: %d\n", tamanhoTotalLista);
-    printf("Tamanho medio ocupado das listas: %d\n", tamanhoTotalLista / numListas);
+    if (numListas > 0)
+        printf("Tamanho medio ocupado das listas: %d\n", tamanhoTotalLista / numListas);
+    else
+        printf("Tamanho medio ocupado das listas: 0 (Nenhuma lista criada)\n");
     printf("Espaços ociosos nas listas: %d\n", tamanhoTotalOcioso);
     printf("Numero de colisoes: %d\n", numColisoes);
     printf("=======================================\n");
