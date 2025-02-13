@@ -20,7 +20,7 @@ int inserir_lista(ListaSequencial* lista, Aluno aluno);
 int remover_lista(ListaSequencial* lista, int matricula);
 Aluno* buscar_lista(ListaSequencial* lista, int matricula);
 
-int imprimir_lista(ListaSequencial* lista);
+void imprimir_lista(ListaSequencial* lista);
 int tamanho_lista_ocupado(ListaSequencial* lista);
 int tamanho_lista_ocioso(ListaSequencial* lista);
 int capacidade(ListaSequencial* lista);
