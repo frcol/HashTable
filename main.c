@@ -27,7 +27,7 @@ void ler_vetor(ListaSequencial* lista) {
 
     int i;
     for(i=0; i < 4; i++){
-        inserir_lista(lista,a[i]);
+        inserir_lista(lista, a[i]);
     }
 }
 
@@ -44,24 +44,24 @@ void buscaAluno(TabelaHash* tabela, int matricula_busca) {
 int main() {
     int tamanho = 1001;
     
-    ListaSequencial* lista = criar_lista();
-    ler_vetor(lista);
+    // ListaSequencial* lista = criar_lista();
+    // ler_vetor(lista);
 
-    imprimir_lista(lista);
+    // imprimir_lista(lista);
 
-    destruir_lista(lista);
+    // destruir_lista(lista);
 
 
-    //TabelaHash* tabela = criar_tabela(tamanho);
+    TabelaHash* tabela = criar_tabela(tamanho);
 
-    // ler_arquivo(tabela, "dados.txt");
+    ler_arquivo(tabela, "dados.txt");
 
-    // printf("Tabela Hash Populada:\n");
-    // imprimir_relatorio(tabela);
+    printf("Tabela Hash Populada:\n");
+    imprimir_relatorio(tabela);
 
-    // buscaAluno(tabela, 234234243);
-    // buscaAluno(tabela, 30856);
+    buscaAluno(tabela, 234234243);
+    buscaAluno(tabela, 30856);
     
-    // destruir_tabela(tabela);
+    destruir_tabela(tabela);
     return 0;
 }

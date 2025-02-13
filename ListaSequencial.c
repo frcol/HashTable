@@ -20,8 +20,10 @@ ListaSequencial *criar_lista()
 
 void destruir_lista(ListaSequencial *lista)
 {
-    free(lista->dados);
-    free(lista);
+    if (lista != NULL) {
+        free(lista->dados);
+        free(lista);
+    }
 }
 
 int inserir_lista(ListaSequencial *lista, Aluno aluno)
