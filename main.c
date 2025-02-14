@@ -19,18 +19,6 @@ void ler_arquivo(TabelaHash* tabela, const char* nome_arquivo) {
     fclose(arquivo);
 }
 
-void ler_vetor(ListaSequencial* lista) {
-    Aluno al, a[4] = {{12352,"Andre",9.5,7.8,8.5},//64
-                    {7894,"Ricardo",7.5,8.7,6.8},//726
-                    {3451,"Bianca",9.7,6.7,8.4},//379
-                    {5293,"Ana",5.7,6.1,7.4}};//173
-
-    int i;
-    for(i=0; i < 4; i++){
-        inserir_lista(lista, a[i]);
-    }
-}
-
 void buscaAluno(TabelaHash* tabela, int matricula_busca) {
     Aluno* encontrado = buscar_tabela(tabela, matricula_busca);
 
@@ -72,7 +60,7 @@ void menu() {
     printf("2 - Buscar aluno\n");
     printf("3 - Remover aluno\n");
     printf("4 - Imprimir tabela hash\n");
-    printf("5 - Imprimir relatório\n");
+    printf("5 - Imprimir relatorio\n");
     printf("6 - Sair\n");
     printf("Escolha uma opcao: ");
 }
@@ -101,6 +89,9 @@ int main() {
                 scanf("%d", &aluno.matricula);
                 printf("Digite o nome do aluno: ");
                 scanf("%s", aluno.nome);
+                aluno.nota1 = 0;
+                aluno.nota2 = 0;
+                aluno.nota3 = 0;
 
                 inserir_tabela(tabela, aluno);
                 printf("Aluno inserido com sucesso!\n");
@@ -118,8 +109,8 @@ int main() {
             case 3:
                 printf("Digite a matricula do aluno a ser removido: ");
                 scanf("%d", &matricula);
-                remover_tabela(tabela, matricula);
-                printf("Aluno removido!\n");
+                remover_tabela(tabela, matricula)==1?printf("Aluno removido!\n"):printf("Aluno nao encontrado!\n");
+                
                 break;
             case 4:
                 imprimir_tabela(tabela);
