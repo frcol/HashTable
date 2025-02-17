@@ -38,7 +38,7 @@ void destruir_tabela(TabelaHash *tabela)
     {
         if (tabela->itens[i] != NULL)
         {
-            destruir_lista(tabela->itens[i]);
+            destruir_lista(&(tabela->itens[i]));
         }
     }
     free(tabela->itens);
@@ -90,14 +90,16 @@ int chaveMultiplicacao(int chave, int TABLE_SIZE)
 // =====================================================
 void inserir_tabela(TabelaHash *tabela, Aluno aluno)
 {
-    if (tabela == NULL) return;
+    if (tabela == NULL)
+        return;
 
     int pos = chaveDivisao(aluno.matricula, tabela->TABLE_SIZE); // <-- alterar a chave para fazer testes de performance
 
     if (tabela->itens[pos] == NULL)
     {
         tabela->itens[pos] = criar_lista();
-        if (tabela->itens[pos] == NULL) {
+        if (tabela->itens[pos] == NULL)
+        {
             printf("Erro: Falha ao alocar memória para nova lista!\n");
             return;
         }
@@ -109,23 +111,24 @@ void inserir_tabela(TabelaHash *tabela, Aluno aluno)
     }
 
     inserir_lista(tabela->itens[pos], aluno);
+    tabela->qtd++;
 }
 
 int remover_tabela(TabelaHash *tabela, int matricula)
 {
-    if (tabela == NULL) 0;
+    if (tabela == NULL)
+        return 0;
 
     int pos = chaveDivisao(matricula, tabela->TABLE_SIZE); // <-- alterar a chave para fazer testes de performance
 
     if (tabela->itens[pos] != NULL)
     {
         int result = remover_lista(tabela->itens[pos], matricula);
-
+        
         // Se a lista estiver vazia após remoção, podemos liberá-la para economizar memória
-        if (tabela->itens[pos]->tamanho == 0)
+        if (tabela->itens[pos]->qtde == 0)
         {
-            destruir_lista(tabela->itens[pos]);
-            tabela->itens[pos] = NULL;
+            destruir_lista(&(tabela->itens[pos]));
             numListas--;
         }
 
@@ -133,6 +136,8 @@ int remover_tabela(TabelaHash *tabela, int matricula)
 
         return result;
     }
+
+    return 0;
 }
 
 Aluno *buscar_tabela(TabelaHash *tabela, int matricula)
@@ -167,17 +172,19 @@ void imprimir_tabela(TabelaHash *tabela)
 
 void imprimir_relatorio(TabelaHash *tabela)
 {
-    if (tabela == NULL) return;
+    if (tabela == NULL)
+        return;
 
     int tamanhoOcupadoTotalLista = 0; // soma total dos itens nas listas
-    int tamanhoTotalLista = 0;        //  capacidade de todas as listas
-    int tamanhoTotalOcioso = 0;
+    int tamanhoTotalLista = 0;        //  tamanho de todas as listas
+    int tamanhoTotalOcioso = 0;       // soma de todos os espaços ociosos das listas
 
     printf("=======================================\n");
     printf("Numero de listas criadas: %d/%d\n", numListas, tabela->TABLE_SIZE);
     printf("Numero de colisoes: %d\n", numColisoes);
 
-    if (numListas == 0) {
+    if (numListas == 0)
+    {
         printf("Nenhuma lista foi criada.\n");
         printf("=======================================\n");
         return;
@@ -196,6 +203,6 @@ void imprimir_relatorio(TabelaHash *tabela)
     printf("Tamanho total das listas: %d\n", tamanhoTotalLista);
     printf("Tamanho medio ocupado das listas: %d\n", (numListas > 0) ? (tamanhoOcupadoTotalLista / numListas) : 0);
     printf("Espacos ociosos nas listas: %d\n", tamanhoTotalOcioso);
-    
+
     printf("=======================================\n");
 }

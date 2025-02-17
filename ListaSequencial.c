@@ -18,12 +18,13 @@ ListaSequencial *criar_lista()
     return lista;
 }
 
-void destruir_lista(ListaSequencial *lista)
+void destruir_lista(ListaSequencial **lista)
 {
-    if (lista != NULL)
+    if (*lista != NULL)
     {
-        free(lista->dados);
-        free(lista);
+        free((*lista)->dados);
+        free(*lista);
+        *lista = NULL; // Atualiza o ponteiro original para NULL
     }
 }
 
