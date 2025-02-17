@@ -111,15 +111,15 @@ void inserir_tabela(TabelaHash *tabela, Aluno aluno)
     inserir_lista(tabela->itens[pos], aluno);
 }
 
-void remover_tabela(TabelaHash *tabela, int matricula)
+int remover_tabela(TabelaHash *tabela, int matricula)
 {
-    if (tabela == NULL) return;
+    if (tabela == NULL) 0;
 
     int pos = chaveDivisao(matricula, tabela->TABLE_SIZE); // <-- alterar a chave para fazer testes de performance
 
     if (tabela->itens[pos] != NULL)
     {
-        remover_lista(tabela->itens[pos], matricula);
+        int result = remover_lista(tabela->itens[pos], matricula);
 
         // Se a lista estiver vazia após remoção, podemos liberá-la para economizar memória
         if (tabela->itens[pos]->tamanho == 0)
@@ -130,6 +130,8 @@ void remover_tabela(TabelaHash *tabela, int matricula)
         }
 
         tabela->qtd--;
+
+        return result;
     }
 }
 
@@ -153,7 +155,7 @@ void imprimir_tabela(TabelaHash *tabela)
     {
         if (tabela->itens[i] != NULL)
         {
-            printf("Posicao %d: (%d)\n", i, qtde_lista_ocupado(tabela->itens[i]));
+            printf("Posicao %d: (%d | %d)\n", i, qtde_lista_ocupado(tabela->itens[i]), tamanho(tabela->itens[i]));
             imprimir_lista(tabela->itens[i]);
         }
         else
@@ -192,7 +194,7 @@ void imprimir_relatorio(TabelaHash *tabela)
     }
 
     printf("Tamanho total das listas: %d\n", tamanhoTotalLista);
-    printf("Tamanho medio ocupado das listas: %d\n", (numListas > 0) ? (tamanhoTotalLista / numListas) : 0);
+    printf("Tamanho medio ocupado das listas: %d\n", (numListas > 0) ? (tamanhoOcupadoTotalLista / numListas) : 0);
     printf("Espacos ociosos nas listas: %d\n", tamanhoTotalOcioso);
     
     printf("=======================================\n");

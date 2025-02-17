@@ -30,7 +30,7 @@ int chaveDobra(int chave, int TABLE_SIZE);
 int chaveMultiplicacao(int chave, int TABLE_SIZE);
 
 void inserir_tabela(TabelaHash* tabela, Aluno aluno);
-void remover_tabela(TabelaHash* tabela, int matricula);
+int remover_tabela(TabelaHash* tabela, int matricula);
 Aluno* buscar_tabela(TabelaHash* tabela, int matricula);
 
 void imprimir_tabela(TabelaHash* tabela);
