@@ -23,23 +23,9 @@ int ler_arquivo(TabelaHash *tabela, const char *nome_arquivo)
     return 1;
 }
 
-void buscaAluno(TabelaHash *tabela, int matricula_busca)
-{
-    Aluno *encontrado = buscar_tabela(tabela, matricula_busca);
-
-    if (encontrado)
-    {
-        printf("Aluno encontrado: %s\n", encontrado->nome);
-    }
-    else
-    {
-        printf("Aluno com matricula %d nao encontrado.\n", matricula_busca);
-    }
-}
-
 void menu()
 {
-    printf("\n===== MENU =====\n");
+    printf("\n\n===== MENU =====\n");
     printf("1 - Inserir aluno\n");
     printf("2 - Carregar tabela teste com 2287 registros\n");
     printf("3 - Buscar aluno\n");
@@ -75,7 +61,7 @@ int main()
         case 1:
         {
             Aluno aluno;
-            printf("Digite a matricula do aluno: ");
+            printf("\nDigite a matricula do aluno: ");
             scanf("%d", &aluno.matricula);
             printf("Digite o nome do aluno: ");
             scanf("%s", aluno.nome);
@@ -84,7 +70,7 @@ int main()
             aluno.nota3 = 0;
             
             inserir_tabela(tabela, aluno);
-            printf("Aluno inserido com sucesso!\n");
+            printf("\nAluno inserido com sucesso!\n");
             break;
         }
         case 2:
@@ -96,7 +82,7 @@ int main()
             }
             else
             {
-                printf("Arquivo carregado com Sucesso\n");
+                printf("\n\nArquivo carregado com Sucesso\n");
             }
             break;
         }
@@ -105,14 +91,14 @@ int main()
             scanf("%d", &matricula);
             Aluno *resultado = buscar_tabela(tabela, matricula);
             if (resultado)
-                printf("Aluno encontrado: Matricula %d, Nome %s\n", resultado->matricula, resultado->nome);
+                printf("\n\nAluno encontrado: Matricula %d, Nome %s\n", resultado->matricula, resultado->nome);
             else
-                printf("Aluno nao encontrado!\n");
+                printf("\n\nAluno nao encontrado!\n");
             break;
         case 4:
-            printf("Digite a matricula do aluno a ser removido: ");
+            printf("\nDigite a matricula do aluno a ser removido: ");
             scanf("%d", &matricula);
-            remover_tabela(tabela, matricula)==1?printf("Aluno removido!"):printf("Aluno nao encontrado!\n");
+            remover_tabela(tabela, matricula)==1?printf("\nAluno removido!"):printf("\nAluno nao encontrado!\n");
             break;
         case 5:
             imprimir_tabela(tabela);

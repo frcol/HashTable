@@ -156,6 +156,7 @@ Aluno *buscar_tabela(TabelaHash *tabela, int matricula)
 // =====================================================
 void imprimir_tabela(TabelaHash *tabela)
 {
+    printf("\n\n");
     for (int i = 0; i < tabela->TABLE_SIZE; i++)
     {
         if (tabela->itens[i] != NULL)
@@ -179,7 +180,7 @@ void imprimir_relatorio(TabelaHash *tabela)
     int tamanhoTotalLista = 0;        //  tamanho de todas as listas
     int tamanhoTotalOcioso = 0;       // soma de todos os espaços ociosos das listas
 
-    printf("=======================================\n");
+    printf("\n\n=======================================\n");
     printf("Numero de listas criadas: %d/%d\n", numListas, tabela->TABLE_SIZE);
     printf("Numero de colisoes: %d\n", numColisoes);
 
