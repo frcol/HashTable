@@ -41,7 +41,7 @@ int main()
     int tamanho, opcao, matricula;
     char nome[50];
 
-    printf("Digite o tamanho da tabela hash: ");
+    printf("Digite o tamanho da tabela hash (dobra): ");
     scanf("%d", &tamanho);
 
     TabelaHash *tabela = criar_tabela(tamanho);
