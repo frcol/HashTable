@@ -39,7 +39,8 @@ int inserir_lista(ListaSequencial *lista, Aluno aluno)
         Aluno *novo_dados = (Aluno *)realloc(lista->dados, lista->tamanho * sizeof(Aluno));
         if (novo_dados == NULL)
         {
-            return 0; // Falha na realocação
+            printf("Erro: Falha ao alocar memória para mais alunos.\n");
+            return 0;
         }
         lista->dados = novo_dados;
     }
@@ -85,14 +86,14 @@ Aluno *buscar_lista(ListaSequencial *lista, int matricula)
 void imprimir_lista(ListaSequencial *lista)
 {
     if (lista != NULL)
+    {
+        for (int i = 0; i < lista->qtde; i++)
         {
-            for (int i = 0; i < lista->qtde; i++)
-            {
-                printf("   Matricula: %d, Nome: %s, Notas: %d %d %d\n",
-                       lista->dados[i].matricula, lista->dados[i].nome,
-                       lista->dados[i].nota1, lista->dados[i].nota2, lista->dados[i].nota3);
-            }
+            printf("   Matricula: %d, Nome: %s, Notas: %d %d %d\n",
+                   lista->dados[i].matricula, lista->dados[i].nome,
+                   lista->dados[i].nota1, lista->dados[i].nota2, lista->dados[i].nota3);
         }
+    }
 }
 
 int qtde_lista_ocupado(ListaSequencial *lista)

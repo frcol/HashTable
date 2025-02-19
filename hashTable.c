@@ -71,8 +71,15 @@ int chaveDobra(int chave, int TABLE_SIZE)
 {
     int num_bits = 10;
     int parte1 = chave >> num_bits;
-    int parte2 = chave & (TABLE_SIZE - 1);
-    return (parte1 ^ parte2);
+    // int parte2 = chave & (TABLE_SIZE - 1);       // estava interrompendo o código, provavel estouro de memória
+    // return (parte1 ^ parte2);
+    // int chaveDobra(int chave, int TABLE_SIZE)
+
+    int parte2 = chave & ((1 << num_bits) - 1);  // Máscara para pegar os bits inferiores
+    int resultado = (parte1 ^ parte2) % TABLE_SIZE; // garante que a chave esteja sempre dentro do intervalo válido
+
+    return (resultado < 0) ? -resultado : resultado; // Garante que o resultado seja positivo
+
 }
 
 //==============================================
