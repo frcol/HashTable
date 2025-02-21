@@ -100,7 +100,7 @@ void inserir_tabela(TabelaHash *tabela, Aluno aluno)
     if (tabela == NULL)
         return;
 
-    int pos = chaveDobra(aluno.matricula, tabela->TABLE_SIZE); // <-- alterar a chave para fazer testes de performance
+    int pos = chaveDobra(aluno.matricula, tabela->TABLE_SIZE); // <-- alterar a chave para fazer testes de performance (chaveDivisao, chaveDobra, chaveMultiplicacao)
 
     if (tabela->itens[pos] == NULL)
     {
@@ -126,7 +126,7 @@ int remover_tabela(TabelaHash *tabela, int matricula)
     if (tabela == NULL)
         return 0;
 
-    int pos = chaveDobra(matricula, tabela->TABLE_SIZE); // <-- alterar a chave para fazer testes de performance
+    int pos = chaveDobra(matricula, tabela->TABLE_SIZE); // <-- alterar a chave para fazer testes de performance (chaveDivisao, chaveDobra, chaveMultiplicacao)
 
     if (tabela->itens[pos] != NULL)
     {
@@ -149,7 +149,7 @@ int remover_tabela(TabelaHash *tabela, int matricula)
 
 Aluno *buscar_tabela(TabelaHash *tabela, int matricula)
 {
-    int pos = chaveDobra(matricula, tabela->TABLE_SIZE); // <-- alterar a chave para fazer testes de performance
+    int pos = chaveDobra(matricula, tabela->TABLE_SIZE); // <-- alterar a chave para fazer testes de performance (chaveDivisao, chaveDobra, chaveMultiplicacao)
 
     // Se não houver lista na posição, o aluno não existe
     if (tabela->itens[pos] == NULL)

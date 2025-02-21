@@ -3,6 +3,8 @@
 #include <stdlib.h>
 #include "hashTable.h"
 
+#define NOME_ARQUIVO "dados2297.txt"
+
 int ler_arquivo(TabelaHash *tabela, const char *nome_arquivo)
 {
     FILE *arquivo = fopen(nome_arquivo, "r");
@@ -27,7 +29,7 @@ void menu()
 {
     printf("\n\n===== MENU =====\n");
     printf("1 - Inserir aluno\n");
-    printf("2 - Carregar tabela teste com 2287 registros\n");
+    printf("2 - Carregar registros do arquivo\n");
     printf("3 - Buscar aluno\n");
     printf("4 - Remover aluno\n");
     printf("5 - Imprimir tabela hash\n");
@@ -38,6 +40,7 @@ void menu()
 
 int main()
 {
+    system("cls");
     int tamanho, opcao, matricula;
     char nome[50];
 
@@ -75,7 +78,7 @@ int main()
         }
         case 2:
         {
-            int ler = ler_arquivo(tabela, "dados.txt");
+            int ler = ler_arquivo(tabela, NOME_ARQUIVO);
             if (ler == 0)
             {
                 printf("Houve um erro ao tentar ler o arquivo.\n");
